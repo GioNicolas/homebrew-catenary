@@ -30,7 +30,7 @@ cask "catenary" do
   # would have worked. Tighten it to the app's actual LSMinimumSystemVersion:
   #   /usr/libexec/PlistBuddy -c 'Print :LSMinimumSystemVersion' \
   #     /Applications/Catenary.app/Contents/Info.plist
-  depends_on macos: ">= :big_sur"
+  depends_on macos: :big_sur
 
   app "Catenary.app"
 

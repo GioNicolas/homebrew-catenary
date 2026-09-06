@@ -5,12 +5,14 @@ The infinite canvas where your coding agents are wired together.
 
 ```sh
 brew tap gionicolas/catenary
+brew trust gionicolas/catenary
 brew install --cask catenary
 ```
 
-Or in one line, without tapping first:
+Or in one line:
 
 ```sh
+brew trust --cask gionicolas/catenary/catenary
 brew install --cask gionicolas/catenary/catenary
 ```
 

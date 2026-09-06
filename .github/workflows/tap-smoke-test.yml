@@ -25,6 +25,7 @@ jobs:
       - name: Tap this checkout
         run: |
           brew tap gionicolas/catenary "$PWD"
+          brew trust gionicolas/catenary
 
       - name: Install
         run: brew install --cask catenary
