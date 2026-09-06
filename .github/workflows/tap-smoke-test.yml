@@ -1,0 +1,48 @@
+# Proves the cask actually installs, which is the only claim that matters and
+# the one a syntax check cannot make. Runs on every push here and weekly, so a
+# release that pushes a bad checksum is caught by us rather than by a user.
+name: Cask smoke test
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        # Both arches: the cask picks the .dmg by `arch`, so an x64-only test
+        # would never exercise the arm64 URL or its checksum (and vice versa).
+        os: [macos-latest, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tap this checkout
+        run: |
+          brew tap gionicolas/catenary "$PWD"
+
+      - name: Install
+        run: brew install --cask catenary
+
+      - name: The app is where it claims to be
+        run: |
+          test -d /Applications/Catenary.app
+          /usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' \
+            /Applications/Catenary.app/Contents/Info.plist
+
+      # Reports what Gatekeeper thinks without failing the job: today this is
+      # expected to be rejected (the build is not notarized yet) and the cask's
+      # postflight is what makes the app usable anyway. When notarization lands,
+      # this line turns into the check that it stayed working — and the
+      # postflight block comes out of the cask.
+      - name: Gatekeeper status (informational)
+        continue-on-error: true
+        run: spctl --assess --type execute --verbose /Applications/Catenary.app
+
+      - name: Uninstall
+        run: brew uninstall --cask catenary
