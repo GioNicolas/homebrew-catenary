@@ -47,3 +47,28 @@ jobs:
 
       - name: Uninstall
         run: brew uninstall --cask catenary
+
+  # The exact command thecatenary.app/install shows, on a runner that has never
+  # tapped or trusted anything: `brew install --cask gionicolas/catenary/catenary`.
+  # Since Homebrew 6.0.0 a third-party tap needs explicit trust, and installing
+  # by the fully qualified name taps it and trusts only this cask
+  # (docs.brew.sh/Tap-Trust). The job above proves the checkout; this one proves
+  # the one-liner a visitor copies from the site. It installs what is PUBLISHED
+  # on main, so it only runs there — on a pull request it would test main, not
+  # the PR.
+  site-command:
+    if: github.ref == 'refs/heads/main'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Install with the site's command (no tap, no trust beforehand)
+        run: brew install --cask gionicolas/catenary/catenary
+
+      - name: The app is where it claims to be
+        run: test -d /Applications/Catenary.app
+
+      - name: Uninstall
+        run: brew uninstall --cask catenary
