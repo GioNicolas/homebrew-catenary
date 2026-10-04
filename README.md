@@ -1,18 +1,9 @@
 # Catenary — Homebrew tap
 
-The infinite canvas where your coding agents are wired together.
+The IDE for coding agents.
 <https://thecatenary.app>
 
 ```sh
-brew tap gionicolas/catenary
-brew trust gionicolas/catenary
-brew install --cask catenary
-```
-
-Or in one line:
-
-```sh
-brew trust --cask gionicolas/catenary/catenary
 brew install --cask gionicolas/catenary/catenary
 ```
 
