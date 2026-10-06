@@ -1,15 +1,15 @@
 cask "catenary" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.0.5"
-  sha256 arm:   "c8a5641686398393a9e7cc0f3757ad993717951512f919c60600c738a4a39db4",
-         intel: "894f954ae8b03e852ffdabc09cbb6e74857aa0b8056ae9c0e4c281a19c5810ca"
+  version "1.1.0"
+  sha256 arm:   "bd566bffda24893be471551b06ded35a1339489e12d611182a86987d29776a8f",
+         intel: "68f33e0dceb122e4308f809e4298753003f392e86e0b7c588e80b0345439d97f"
 
   url "https://github.com/GioNicolas/catenary-releases/releases/download/v#{version}/Catenary-#{version}-#{arch}.dmg",
       verified: "github.com/GioNicolas/catenary-releases/"
 
   name "Catenary"
-  desc "Infinite canvas IDE where your coding agents are wired together"
+  desc "The IDE for coding agents"
   homepage "https://thecatenary.app/"
 
   livecheck do
