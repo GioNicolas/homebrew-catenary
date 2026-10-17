@@ -1,9 +1,9 @@
 cask "catenary" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.2.0"
-  sha256 arm:   "754b8552f073dd0f886f46242988b29b9a6807697330285268153377d373f2d6",
-         intel: "5bc1fbce489794beac5043c34ec810d5f0cc75911dfebcef45667797cbe318e6"
+  version "1.2.1"
+  sha256 arm:   "b55ea93619b543dc7aaf05a19a352120f65bf2ba658e61cc7e79f3cd891b6a7a",
+         intel: "be4901bf0896cf067623f404b156ad99925515d3091a3ea67cb00d1a2f66ece2"
 
   url "https://github.com/GioNicolas/catenary-releases/releases/download/v#{version}/Catenary-#{version}-#{arch}.dmg",
       verified: "github.com/GioNicolas/catenary-releases/"
